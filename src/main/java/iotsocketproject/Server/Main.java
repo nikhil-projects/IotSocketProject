@@ -11,7 +11,7 @@ package iotsocketproject.Server;
  */
 public class Main {
     public static dbHandler data = new dbHandler();
-    
+    public static DeviceWebSocket dSocket = new DeviceWebSocket(); 
     public static void main(String [] args){
         
         
