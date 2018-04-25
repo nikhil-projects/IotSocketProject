@@ -10,5 +10,11 @@ package iotsocketproject.Server;
  * @author User
  */
 public class Main {
+    public static dbHandler db = new dbHandler();
+    
+    public static void main(String [] args){
+        System.out.println("Hola mundo!");
+        db.sendToDatabase();
+    }
     
 }
