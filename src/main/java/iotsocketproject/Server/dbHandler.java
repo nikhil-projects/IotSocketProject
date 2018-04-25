@@ -40,7 +40,7 @@ public class dbHandler {
             e.printStackTrace();
         }
      }
-    public void getFromDatabase(){
+    public List<Integer> getFromDatabase(){
         List<Integer> list = new ArrayList<>(); 
         try{
          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -51,19 +51,14 @@ public class dbHandler {
          while(rs.next()){
              list.add(rs.getInt("temp"));
          }
-         
-         // Senaste 7 dagarna - för senare anvädning
-//        System.out.println(list);
-//        for (int i = list.size()-1; i > list.size()-7; i--) {
+//        for (int i = list.size()-1; i > list.size()-x; i--) {
 //            System.out.println(list.get(i));
 //            System.out.println(i);
 //        }
-
-            
     }   catch(Exception e){
         e.printStackTrace();
     }
-    
+        return list;
     }
     
     
