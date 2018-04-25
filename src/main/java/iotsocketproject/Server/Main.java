@@ -13,8 +13,11 @@ public class Main {
     public static dbHandler db = new dbHandler();
     
     public static void main(String [] args){
-        System.out.println("Hola mundo!");
-        db.sendToDatabase();
+        
+        String temp = "22"; // Johns värde ska in här iställe fr 22
+        db.sendToDatabase(temp);
+        //db.getFromDatabase();
+        
     }
     
 }

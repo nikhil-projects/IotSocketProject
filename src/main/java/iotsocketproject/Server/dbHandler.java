@@ -53,13 +53,12 @@ public class dbHandler {
              list.add(rs.getInt("temp"));
          }
          
-         
-            System.out.println(list);
-     
-        for (int i = list.size()-1; i > list.size()-7; i--) {
-            System.out.println(list.get(i));
-            System.out.println(i);
-        }
+         // Senaste 7 dagarna - för senare anvädning
+//        System.out.println(list);
+//        for (int i = list.size()-1; i > list.size()-7; i--) {
+//            System.out.println(list.get(i));
+//            System.out.println(i);
+//        }
 
             
     }   catch(Exception e){
