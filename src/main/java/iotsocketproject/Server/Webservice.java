@@ -2,6 +2,8 @@ package iotsocketproject.Server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class Webservice extends HttpServlet{
-
+ Server s = new Server();
  private String value;
  private String temp = "15";
- private List<Integer> list;
+ private List<Integer> list = Arrays.asList(1,2,3,4,5);
+ 
        
      public void init() throws ServletException{}
 
    public void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, 
       IOException{ 
-       
       value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
@@ -28,13 +30,12 @@ public class Webservice extends HttpServlet{
       out.println("<h1>Select what data you want to view:</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
-      if ("1".equals(value)) {out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                                          "This is your current temp:"+temp+"</textarea>");}
+      if ("1".equals(value)) {
+           out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+""+                    "This is your current temp:"+temp+"</textarea>");}
       if ("2".equals(value)) {
-          Server s = new Server();
-          list = s.GetFromDatabase(); 
-          out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                   "This is your historical temp:"+list+"</textarea>");}
+           out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+""+                    "This is your historical temp:"+list+"</textarea>");}
       
       
       out.println("<br>\n" +
@@ -51,6 +52,7 @@ public class Webservice extends HttpServlet{
    public void doPost(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, 
       IOException{ 
+    
        doGet(request, response);
        
    } 
