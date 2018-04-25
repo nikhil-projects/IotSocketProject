@@ -5,6 +5,8 @@
  */
 package iotsocketproject.Server;
 
+import java.util.List;
+
 /**
  *
  * @author User
@@ -23,9 +25,10 @@ package iotsocketproject.Server;
      }
      
      //Adams method
-     public void GetFromDatabase(){
+     public List <Integer> GetFromDatabase(){
          dbHandler db = new dbHandler();
-         db.getFromDatabase();
+         List <Integer> l = db.getFromDatabase();
+         return l;
      }
  
  }
