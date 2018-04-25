@@ -14,7 +14,7 @@ package iotsocketproject.Server;
      
      //Johns method!
      public void sendTempToDatabase(String temp , String deviceId ){
-         //hårdkodade värden, ändra här.
+         //Change this .
          temp = "30";
          deviceId = "01";
          dbHandler db = new dbHandler();
@@ -23,7 +23,7 @@ package iotsocketproject.Server;
      }
      
      //Adams method
-     public void GetFromDatabase(String temp, String deviceId){
+     public void GetFromDatabase(){
          dbHandler db = new dbHandler();
          db.getFromDatabase();
      }
