@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Temperature Data</title>
+        <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Select what data you want to view:</h1>
+         <form action = "WebApp" method = "POST">
+            
+            <br>
+            <select name="value">
+                <option value="1">Current</option>
+                <option value="2">Historical</option>
+            </select>
+            
+            <input type = "submit" value = "Submit">
+        </form>
+    
     </body>
 </html>
