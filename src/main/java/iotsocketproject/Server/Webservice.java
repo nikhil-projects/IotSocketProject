@@ -25,7 +25,7 @@ public class Webservice extends HttpServlet{
        value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
-      out.println("<!DOCTYPE html><HTML><HEAD><TITLE>Temperature Data</TITLE><meta charset=\"UTF-8\"></HEAD><BODY>");
+      out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
       out.println("<h1>Select what data you want to view:</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
