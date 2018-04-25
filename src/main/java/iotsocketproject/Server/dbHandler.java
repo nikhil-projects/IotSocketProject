@@ -31,7 +31,6 @@ public class dbHandler {
         
         try{
         Class.forName("com.mysql.cj.jdbc.Driver");
-        // String anrop = String.format("INSERT INTO Temperature(%s,Temp) VALUES(%s, Temp);", deviceId, Temp);
         String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (%s, %s);", temp, deviceId);
          Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();

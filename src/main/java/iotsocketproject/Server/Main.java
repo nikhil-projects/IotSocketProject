@@ -10,13 +10,14 @@ package iotsocketproject.Server;
  * @author User
  */
 public class Main {
-    public static dbHandler db = new dbHandler();
+    public static dbHandler data = new dbHandler();
     
     public static void main(String [] args){
         
-        String temp = "22"; // Johns värde ska in här iställe fr 22
-        //db.sendToDatabase(temp);
-        //db.getFromDatabase();
+        
+        String temp = "22";
+        String deviceId = "222";
+        data.sendToDatabase(temp, deviceId);
         
     }
     
