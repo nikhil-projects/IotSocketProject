@@ -30,3 +30,4 @@ public class Server {
     private Session session;
     private static final Set<ChatEndpoint> chatEndpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();
+}
