@@ -27,12 +27,12 @@ public class dbHandler {
     String username = "iotdbuser";
     String password = "iotdbuser123";
     String connectionString = "jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/iotdb";
-    public void sendToDatabase(){
+    public void sendToDatabase(String temp, String deviceId){
         
         try{
         Class.forName("com.mysql.cj.jdbc.Driver");
         // String anrop = String.format("INSERT INTO Temperature(%s,Temp) VALUES(%s, Temp);", deviceId, Temp);
-        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (34, 77);");
+        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (%s, %s);", temp, deviceId);
          Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();
          stmt.executeUpdate(anrop);
