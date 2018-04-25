@@ -24,16 +24,16 @@ import java.util.List;
  * @author User
  */
 public class dbHandler {
-    
-    
+    String username = "iotdbuser";
+    String password = "iotdbuser123";
+    String connectionString = "jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/iotdb";
     public void sendToDatabase(){
-        String deviceId = "Temp";
-        String Temp = "23";
+        
         try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         // String anrop = String.format("INSERT INTO Temperature(%s,Temp) VALUES(%s, Temp);", deviceId, Temp);
-        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (222, 122);");
-         Connection con = DriverManager.getConnection("jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/Temperature", "iotuserdb", "iotuserdb123");
+        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (34, 77);");
+         Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();
          stmt.executeUpdate(anrop);
          
@@ -41,6 +41,35 @@ public class dbHandler {
             e.printStackTrace();
         }
      }
+    public void getFromDatabase(){
+        List<Integer> list = new ArrayList<>(); 
+        try{
+         Class.forName("com.mysql.cj.jdbc.Driver");
+         String anrop =  String.format("SELECT * FROM iotdb.Temperature;");
+         Connection con = DriverManager.getConnection(connectionString, username, password);
+         Statement stmt = con.createStatement();
+         ResultSet rs = stmt.executeQuery(anrop);
+         while(rs.next()){
+             list.add(rs.getInt("temp"));
+         }
+         
+         
+            System.out.println(list);
+     
+        for (int i = list.size()-1; i > list.size()-7; i--) {
+            System.out.println(list.get(i));
+            System.out.println(i);
+        }
+
+            
+    }   catch(Exception e){
+        e.printStackTrace();
+    }
+    
+    }
+    
+    
+    
 //     public List <Devices> connectAndQueryDatabase(String choice){
 //         List<Devices> listan = new ArrayList<>();   
 //         try{
