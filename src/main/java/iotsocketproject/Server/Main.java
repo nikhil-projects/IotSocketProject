@@ -15,7 +15,7 @@ public class Main {
     public static void main(String [] args){
         
         String temp = "22"; // Johns värde ska in här iställe fr 22
-        db.sendToDatabase(temp);
+        //db.sendToDatabase(temp);
         //db.getFromDatabase();
         
     }
