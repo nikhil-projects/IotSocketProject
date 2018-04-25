@@ -13,29 +13,30 @@ public class Webservice extends HttpServlet{
 
  private String value;
  private String temp = "15";
- private List<Integer> historical;
- 
-     public void init() throws ServletException 
-    {              
-           Server s = new Server();
-           historical = s.GetFromDatabase();
-           System.out.println(historical);
-    }
+ private List<Integer> list;
+       
+     public void init() throws ServletException{}
 
    public void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, 
       IOException{ 
-       value = request.getParameter("value");
+       
+      value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
       out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
       out.println("<h1>Select what data you want to view:</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
-      if ("1".equals(value)) out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                                          "This is your current temp:"+temp+"</textarea>");
-      if ("2".equals(value)) out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                                          "This is your historical temp:"+historical+"</textarea>");
+      if ("1".equals(value)) {out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+""+                                          "This is your current temp:"+temp+"</textarea>");}
+      if ("2".equals(value)) {
+          Server s = new Server();
+          list = s.GetFromDatabase(); 
+          out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+""+                   "This is your historical temp:"+list+"</textarea>");}
+      
+      
       out.println("<br>\n" +
 "            <select name=\"value\">\n" +
 "                <option value=\"1\">Current</option>\n" +
