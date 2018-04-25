@@ -2,6 +2,7 @@ package iotsocketproject.Server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,13 @@ public class Webservice extends HttpServlet{
 
  private String value;
  private String temp = "15";
- private String[] historical;
+ private List<Integer> historical;
  
-    public void init() throws ServletException 
+     public void init() throws ServletException 
     {              
-           
+           Server s = new Server();
+           historical = s.GetFromDatabase();
+           System.out.println(historical);
     }
 
    public void doGet(HttpServletRequest request, 
@@ -32,7 +35,7 @@ public class Webservice extends HttpServlet{
       if ("1".equals(value)) out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
 ""+                                          "This is your current temp:"+temp+"</textarea>");
       if ("2".equals(value)) out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                                          "This is your historical temp</textarea>");
+""+                                          "This is your historical temp:"+historical+"</textarea>");
       out.println("<br>\n" +
 "            <select name=\"value\">\n" +
 "                <option value=\"1\">Current</option>\n" +
@@ -48,5 +51,6 @@ public class Webservice extends HttpServlet{
       HttpServletResponse response) throws ServletException, 
       IOException{ 
        doGet(request, response);
+       
    } 
 }
