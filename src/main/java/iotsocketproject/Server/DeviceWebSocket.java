@@ -26,8 +26,10 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/endpoint", decoders = {DeviceDecoder.class})
 public class DeviceWebSocket {
     public static Device currentDevice = new Device();
+    private Session session;
 
 private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+
     /*
     @OnMessage
     public String onMessage(String message) {
@@ -35,6 +37,7 @@ private static final Set<Session> peers = Collections.synchronizedSet(new HashSe
         return null;
     }
 */
+
     @OnMessage
     public void broadcastFigure(Device device, Session session) throws IOException, EncodeException {
         currentDevice.setDeviceID(device.getDeviceID());
@@ -42,6 +45,7 @@ private static final Set<Session> peers = Collections.synchronizedSet(new HashSe
         System.out.println("received device msg_id: " + device.getDeviceID());
         System.out.println("received device msg_temp: " + device.getTemp());
         data.sendToDatabase(device.getTemp(), device.getDeviceID()); 
+        session.getBasicRemote().sendText("Hej");
         
         //for (Session peer : peers) {
         //    if (!peer.equals(session))  { 
