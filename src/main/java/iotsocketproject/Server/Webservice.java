@@ -20,10 +20,17 @@ public class Webservice extends HttpServlet{
  public static String temp = currentDevice.getTemp();
  public static String deviceID = currentDevice.getDeviceID();
  public List<Integer> list = data.getFromDatabase();
- //private List<Integer> list = Arrays.asList(1,2,3,4,5);
+ public String lista;
  
-       
-     public void init() throws ServletException{}
+    public String test(List<Integer> list) { 
+        for (int i = 0; i < list.size(); i++){
+           lista += list.get(i);
+           lista += "\n";
+       }   
+       return lista;
+   }
+ 
+   public void init() throws ServletException{}
 
  @Override
    public void doGet(HttpServletRequest request, 
@@ -34,7 +41,7 @@ public class Webservice extends HttpServlet{
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
       out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
-      out.println("<h1>Select what data you want to view:"+ deviceID + "</h1>\n" +
+      out.println("<h1>Select what data you want to view: "+ deviceID + "</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
       if ("1".equals(value)) {
@@ -42,7 +49,7 @@ public class Webservice extends HttpServlet{
 ""+                    "This is your current temp:"+temp+"</textarea>");}
       if ("2".equals(value)) {
            out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                    "This is your historical temp:"+list+"</textarea>");}
+""+                    "This is your historical temp:"+test(list)+"</textarea>");}
       
       
       out.println("<br>\n" +
