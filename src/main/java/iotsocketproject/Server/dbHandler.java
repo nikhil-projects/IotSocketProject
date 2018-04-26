@@ -5,18 +5,23 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.Date;
+import java.util.Properties;
 
 public class dbHandler {
-    String username = "iotdbuser";
-    String password = "iotdbuser123";
-    String connectionString = "jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/iotdb";
+    
+    Date date = new Date();
+    String username = "";
+    String password = "";
+    String connectionString = "";
+    
     public void sendToDatabase(String temp, String deviceId){
-        
+        String time = date.toString();
         try{
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId) VALUES (%s, %s);", temp, deviceId);
+        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId, date) VALUES (%s, %s, %s);", temp, deviceId, time);
          Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();
          stmt.executeUpdate(anrop);

@@ -15,7 +15,6 @@ import static sun.audio.AudioDevice.device;
 
 
 public class Webservice extends HttpServlet{
- Server s = new Server();
  private String value;
  public static String temp = currentDevice.getTemp();
  public static String deviceID = currentDevice.getDeviceID();
