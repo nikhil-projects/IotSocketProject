@@ -7,20 +7,26 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Select what data you want to view:</h1>
-         <form action = "WebApp" method = "POST">
-            
-            <br>
-            <select name="value">
-                <option value="1">Current</option>
-                <option value="2">Historical</option>
-            </select>
-            
-            <input type = "submit" class="btn btn-primary btn-sm" value = "Submit">
-        </form>
-    
-    <h1>Collaborative Whiteboard App</h1>
-    
+   <div class="jumbotron">
+  <h1 class="display-4">IoT Temperature data!</h1>
+  <p class="lead">Welcome to the awsome Iot Socket project</p>
+  <hr class="my-4">
+  <p>Select what data you want to view:</p>
+  <form action = "WebApp" method = "POST">
+                       
+            <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+  </div>
+  <select name="value" class="custom-select" id="inputGroupSelect01">
+    <option selected>Choose...</option>
+    <option value="1">Current</option>
+    <option value="2">Historical</option>
+  </select>
+                <input type = "submit" class="btn btn-primary btn-sm" value = "Submit">
+    </div>
+   </form>
+</div>
     <script type="text/javascript" src="websocket.js"></script>
     <div id="output"></div>
     
