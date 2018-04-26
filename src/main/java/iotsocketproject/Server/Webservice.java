@@ -16,7 +16,9 @@ import static sun.audio.AudioDevice.device;
 public class Webservice extends HttpServlet{
  Server s = new Server();
  private String value;
- private String temp = currentDevice.getDeviceID();
+ public static String temp = currentDevice.getTemp();
+ public static String deviceID = currentDevice.getDeviceID();
+
  private List<Integer> list = Arrays.asList(1,2,3,4,5);
  
        
@@ -26,12 +28,12 @@ public class Webservice extends HttpServlet{
    public void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, 
       IOException{ 
-      
+      System.out.println(temp);
       value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
       out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
-      out.println("<h1>Select what data you want to view:</h1>\n" +
+      out.println("<h1>Select what data you want to view:"+ deviceID + "</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
       if ("1".equals(value)) {
