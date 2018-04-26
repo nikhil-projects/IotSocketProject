@@ -14,11 +14,6 @@ public class Main {
     public static DeviceWebSocket dSocket = new DeviceWebSocket(); 
     public static void main(String [] args){
         
-        
-        String temp = "22";
-        String deviceId = "222";
-        data.sendToDatabase(temp, deviceId);
-        
     }
     
 }

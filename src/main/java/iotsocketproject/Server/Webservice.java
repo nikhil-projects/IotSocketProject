@@ -1,5 +1,6 @@
 package iotsocketproject.Server;
 
+import static iotsocketproject.Server.DeviceWebSocket.currentDevice;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,20 +10,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static sun.audio.AudioDevice.device;
 
 
 public class Webservice extends HttpServlet{
  Server s = new Server();
  private String value;
- private String temp = "15";
+ private String temp = currentDevice.getDeviceID();
  private List<Integer> list = Arrays.asList(1,2,3,4,5);
  
        
      public void init() throws ServletException{}
 
+ @Override
    public void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, 
       IOException{ 
+      
       value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
