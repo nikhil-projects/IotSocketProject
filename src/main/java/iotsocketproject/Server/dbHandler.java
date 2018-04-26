@@ -15,7 +15,7 @@ public class dbHandler {
     Calendar rightNow = Calendar.getInstance();
     
     String username = "iotdbuser";
-    String password = "iotdbuser12345";
+    String password = "iotdbuser321";
     String connectionString = "jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/iotdb";
     
     public void sendToDatabase(String temp, String deviceId){
@@ -36,7 +36,7 @@ public class dbHandler {
         List<Integer> list = new ArrayList<>(); 
         try{
          Class.forName("com.mysql.cj.jdbc.Driver");
-         String anrop =  String.format("SELECT * FROM iotdb.Temperature;");
+         String anrop =  String.format("SELECT * FROM iotdb.Temperature order by id desc limit 10;");
          Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();
          ResultSet rs = stmt.executeQuery(anrop);
