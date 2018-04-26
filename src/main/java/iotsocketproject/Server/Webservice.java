@@ -1,6 +1,7 @@
 package iotsocketproject.Server;
 
 import static iotsocketproject.Server.DeviceWebSocket.currentDevice;
+import static iotsocketproject.Server.Main.data;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class Webservice extends HttpServlet{
  private String value;
  public static String temp = currentDevice.getTemp();
  public static String deviceID = currentDevice.getDeviceID();
-
- private List<Integer> list = Arrays.asList(1,2,3,4,5);
+ public List<Integer> list = data.getFromDatabase();
+ //private List<Integer> list = Arrays.asList(1,2,3,4,5);
  
        
      public void init() throws ServletException{}
