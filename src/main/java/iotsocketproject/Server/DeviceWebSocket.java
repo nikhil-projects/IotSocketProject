@@ -42,6 +42,7 @@ private static final Set<Session> peers = Collections.synchronizedSet(new HashSe
     public void broadcastFigure(Device device, Session session) throws IOException, EncodeException {
         currentDevice.setDeviceID(device.getDeviceID());
         currentDevice.setTemp(device.getTemp());
+        System.out.println("CurrentDebug" +currentDevice.getTemp());
         System.out.println("received device msg_id: " + device.getDeviceID());
         System.out.println("received device msg_temp: " + device.getTemp());
         data.sendToDatabase(device.getTemp(), device.getDeviceID()); 

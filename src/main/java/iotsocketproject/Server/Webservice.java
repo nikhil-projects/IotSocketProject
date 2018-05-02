@@ -16,8 +16,8 @@ import static sun.audio.AudioDevice.device;
 
 public class Webservice extends HttpServlet{
  private String value;
- public static String temp = currentDevice.getTemp();
- public static String deviceID = currentDevice.getDeviceID();
+ public static String temp;
+ public static String deviceID;
  public List<Integer> list = data.getFromDatabase();
  public String lista;
  
@@ -36,9 +36,12 @@ public class Webservice extends HttpServlet{
       HttpServletResponse response) throws ServletException, 
       IOException{ 
       System.out.println(temp);
+      temp = currentDevice.getTemp();
+      deviceID = currentDevice.getDeviceID();
       value = request.getParameter("value");
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
+      System.out.println("temp from debugg"+ temp);
       out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
       out.println("<h1>Select what data you want to view: "+ deviceID + "</h1>\n" +
 "       \n" +
