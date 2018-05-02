@@ -14,9 +14,9 @@ import java.util.Properties;
 public class dbHandler {
     Calendar rightNow = Calendar.getInstance();
     
-    String username = "iotdbuser";
-    String password = "iotdbuser321";
-    String connectionString = "jdbc:mysql://iotdb.clktdo6naxfv.eu-central-1.rds.amazonaws.com:3306/iotdb";
+    String username = "";
+    String password = "";
+    String connectionString = "";
     
     public void sendToDatabase(String temp, String deviceId){
         String time = time();
@@ -35,17 +35,24 @@ public class dbHandler {
     public List<Integer> getFromDatabase(){
         List<Integer> list = new ArrayList<>(); 
         try{
+         
          Class.forName("com.mysql.cj.jdbc.Driver");
          String anrop =  String.format("SELECT * FROM iotdb.Temperature order by id desc limit 10;");
          Connection con = DriverManager.getConnection(connectionString, username, password);
          Statement stmt = con.createStatement();
          ResultSet rs = stmt.executeQuery(anrop);
+         
+         if(rs.next()){
          while(rs.next()){
              list.add(rs.getInt("temp"));
+         }
+         }else{
+                list.add(0);
          }
             System.out.println(list);
     }   catch(Exception e){
         e.printStackTrace();
+            System.out.println(e);
     }
         return list;
     }
