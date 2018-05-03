@@ -42,15 +42,15 @@ public class Webservice extends HttpServlet{
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();  
       System.out.println("temp from debugg"+ temp);
-      out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY>");
-      out.println("<h1>Select what data you want to view: "+ deviceID + "</h1>\n" +
+      out.println("<!DOCTYPE html><HTML lang=\"en\"><HEAD><TITLE>Temperature Data</TITLE><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\" integrity=\"sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy\" crossorigin=\"anonymous\"><meta charset=\"UTF-8\"></HEAD><BODY><div class=\"jumbotron\">");
+      out.println("<h1>Device Id: "+ deviceID + "</h1>\n" +
 "       \n" +
 "        <form action = \"WebApp\" method = \"POST\">");
       if ("1".equals(value)) {
-           out.println("<textarea readonly name=\"output\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+           out.println("<textarea readonly name=\"output\" rows=\"10\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
 ""+                    "This is your current temp:"+temp+"</textarea>");}
       if ("2".equals(value)) {
-           out.println("<textarea readonly name=\"message\" rows=\"30\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
+           out.println("<textarea readonly name=\"message\" rows=\"10\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
 ""+                    "This is your historical temp:"+test(list)+"</textarea>");}
       
       
@@ -60,9 +60,9 @@ public class Webservice extends HttpServlet{
 "                <option value=\"2\">Historical</option>\n" +
 "            </select>\n" +
 "            \n" +
-"            <input type = \"submit\" value = \"Submit\">\n" +
+"            <input type = \"submit\" class=\"btn btn-primary btn-sm\" value = \"Submit\">\n" + 
 "        </form>");
-      out.println("<a href=\"javascript:history.back()\">Go Back</a></BODY></HTML>");
+      out.println("<a href=\"javascript:history.back()\">Go Back</a></div></BODY></HTML>");
    } 
    
    public void doPost(HttpServletRequest request, 
