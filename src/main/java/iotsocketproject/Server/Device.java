@@ -19,6 +19,7 @@ public class Device {
     private String temp;
     private String datetime;
 
+        public Device(){}
 
         public void setDeviceID(String deviceID) {
             this.deviceId = deviceID;

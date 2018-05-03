@@ -7,11 +7,13 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
+
 import java.util.Properties;
 
 public class dbHandler {
@@ -19,17 +21,23 @@ public class dbHandler {
     public static String username = "";
     public static String password = "";
     public String connectionString = "";
+    public Boolean propRead = false;
+  
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("y-M-d h:m:s");
     
     //Reader for api keys file
     Properties prop = new Properties();
     InputStream input = null;
+    
+    
 
     public void fileIn(){
     
-    try {
-          
+        if ( propRead == false ){
+            try {
+                
 		input = getClass().getClassLoader().getResourceAsStream("config.properties");
-
+                //input = new FileInputStream("config.properties");
 		// load a properties file
 		prop.load(input);
 
@@ -37,65 +45,79 @@ public class dbHandler {
                 this.connectionString=prop.getProperty("database");
 		this.username=prop.getProperty("dbuser");
 		this.password=prop.getProperty("dbpassword");
-                System.out.println("______________________________"+connectionString);
+                propRead=true;
 
-	} catch (IOException ex) {
-		ex.printStackTrace();
-                System.out.println("ERROR:" +ex);
-	} finally {
-		if (input != null) {
-			try {
-				input.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.out.println("ERROR:" +ex);
+            } finally {
+                    if (input != null) {
+                            try {
+                                    input.close();
+                            } catch (IOException e) {
+                                    e.printStackTrace();
+                            }
+                	}
+                }
+        }
     }
 
     
 
     
     public void sendToDatabase(String temp, String deviceId){
-        String time = time();
+
         try{
-        fileIn();
-        
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId, date) VALUES (%s, %s, '%s');", temp, deviceId, time);
-         Connection con = DriverManager.getConnection(connectionString, username, password);
-         Statement stmt = con.createStatement();
-         stmt.executeUpdate(anrop);
+            fileIn();
+            String time = time();
+            Date now = new Date();
+            String time2 = dateFormatter.format(now);
+            System.out.println("TIME:" +time2);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String anrop = String.format("INSERT INTO iotdb.Temperature (temp, deviceId, date) VALUES (%s, %s, '%s');", temp, deviceId, time2);
+            Connection con = DriverManager.getConnection(connectionString, username, password);
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(anrop);
+            stmt.close();
          
         } catch (Exception e) {
             e.printStackTrace();
         }
      }
     
-    public List<Integer> getFromDatabase(){
+    public List<String> getFromDatabase(){
         List<Integer> list = new ArrayList<>(); 
+        List<String> dateList = new ArrayList<>();
         try{
-         fileIn();
-
-         Class.forName("com.mysql.cj.jdbc.Driver");
-         String anrop =  String.format("SELECT * FROM iotdb.Temperature order by id desc limit 10;");
-         Connection con = DriverManager.getConnection(connectionString, username, password);
-         Statement stmt = con.createStatement();
-         ResultSet rs = stmt.executeQuery(anrop);
          
-         if(rs.next()){
-         while(rs.next()){
-             list.add(rs.getInt("temp"));
-         }
-         }else{
-                list.add(0);
-         }
-            System.out.println(list);
-    }   catch(Exception e){
-        e.printStackTrace();
-            System.out.println(e);
-    }
-        return list;
+            fileIn();       
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String anrop =  String.format("SELECT * FROM iotdb.Temperature order by id desc limit 10;");
+            Connection con = DriverManager.getConnection(connectionString, username, password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(anrop);
+         
+         
+        if(rs.next()){
+            while(rs.next()){
+               // list.add(rs.getInt("temp"));
+                dateList.add(String.format("Temp: [%d] - Date: [%s] \n",rs.getInt("temp"), rs.getString("date")));
+                System.out.println("DATUM: "+ rs.getString("date"));
+                }
+            
+            stmt.close();
+            }else{
+                dateList.add("No Connection");
+
+            }
+            
+            
+          
+        }   catch(Exception e){
+                e.printStackTrace();
+                System.out.println(e);
+            }
+        return dateList;
     }
     
     public String time(){

@@ -18,10 +18,10 @@ public class Webservice extends HttpServlet{
  private String value;
  public static String temp;
  public static String deviceID;
- public List<Integer> list = data.getFromDatabase();
+ 
  public String lista;
  
-    public String test(List<Integer> list) { 
+    public String test(List<String> list) { 
         for (int i = 0; i < list.size(); i++){
            lista += list.get(i);
            lista += "\n";
@@ -32,10 +32,8 @@ public class Webservice extends HttpServlet{
    public void init() throws ServletException{}
 
  @Override
-   public void doGet(HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, 
-      IOException{ 
-      System.out.println(temp);
+   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{ 
+      List<String> list = data.getFromDatabase();
       temp = currentDevice.getTemp();
       deviceID = currentDevice.getDeviceID();
       value = request.getParameter("value");
@@ -51,7 +49,8 @@ public class Webservice extends HttpServlet{
 ""+                    "This is your current temp:"+temp+"</textarea>");}
       if ("2".equals(value)) {
            out.println("<textarea readonly name=\"message\" rows=\"10\" cols=\"50\" placeholder=\"Your data will be displayed here...\">" +
-""+                    "This is your historical temp:"+test(list)+"</textarea>");}
+""+                    list+"</textarea>");}
+      list.removeAll(list);
       
       
       out.println("<br>\n" +
