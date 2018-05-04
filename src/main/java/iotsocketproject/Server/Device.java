@@ -11,7 +11,8 @@ import javax.json.JsonObject;
 
 /**
  *
- * @author Xeno
+ * @author JS
+ * Device class for trasfering data to DB and to Front end
  */
 public class Device {
 
