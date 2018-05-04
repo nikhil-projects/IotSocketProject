@@ -30,14 +30,14 @@ public class dbHandler {
     InputStream input = null;
     
     
-
+    //Method for storing API keys from file to variables in code
     public void fileIn(){
     
         if ( propRead == false ){
             try {
                 
 		input = getClass().getClassLoader().getResourceAsStream("config.properties");
-                //input = new FileInputStream("config.properties");
+               
 		// load a properties file
 		prop.load(input);
 
@@ -45,6 +45,7 @@ public class dbHandler {
                 this.connectionString=prop.getProperty("database");
 		this.username=prop.getProperty("dbuser");
 		this.password=prop.getProperty("dbpassword");
+                //Dont read API from file after first time
                 propRead=true;
 
             } catch (IOException ex) {
